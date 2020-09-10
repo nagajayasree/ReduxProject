@@ -1,28 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Container } from "react-bootstrap";
 
 class Feed extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      //   feedPosts: [],
-    };
+    this.state = {};
   }
-
-  //   componentDidMount() {
-  //     this.props.dispatch({ type: "GET_FEEDPOSTS" });
-  //   }
-
-  //   getPosts = () => {
-  // this.props.dispatch({ type: "GET_FEEDPOSTS" });
-  //   };
 
   render() {
     return (
       <>
-        <p>Feed</p>
-        {/* <button onClick={this.getPosts}>Get FeedPosts</button> */}
-        {this.props.feedPosts}
+        <Container fluid>
+          <h1>FeedList</h1>
+          {this.props.feedPosts.map((p) => {
+            return (
+              <ul key={p.id}>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </ul>
+            );
+          })}
+        </Container>
       </>
     );
   }
@@ -32,4 +31,4 @@ const mapStateToProps = (state) => ({
   feedPosts: state.feedPosts,
 });
 
-export default connect(mapStateToProps, Feed);
+export default connect(mapStateToProps)(Feed);
